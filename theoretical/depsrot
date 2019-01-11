@@ -1,0 +1,19 @@
+#!/usr/bin/env minscript
+# taken from https://github.com/dlang/dmd/blob/master/test/runnable/depsprot.sh
+require(dmd)
+require(model)
+set(repo_dir dir($script.dir))
+dmd -of=$repo_dir path($repo_dir "minscript.d")
+
+set(deps_file $env.OUTPUT_BASE;.deps)
+
+function die()
+{
+    echo "--- deps file ----"
+    cat $deps_file
+    echo
+    echo $script.args
+    exit 1
+}
+
+$dmd -m$model -deps=$depf_file -Irunnable/imports -o- $env.EXTRA_FILES/$env.TEST_NAME;.d

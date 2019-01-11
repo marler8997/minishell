@@ -1,0 +1,3 @@
+#!/usr/bin/env minscript
+@set repo_dir @dir($script.dir)
+dmd -of=$repo_dir @path($repo_dir "minscript.d")
